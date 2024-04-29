@@ -1,0 +1,27 @@
+RewriteEngine On
+RewriteBase /
+RewriteRule ^$ homepage.php [L]
+
+# Redirect /homepage.php to /homepage
+RewriteCond %{THE_REQUEST} /homepage\.php [NC]
+RewriteRule ^ /homepage [R=301,L]
+
+# Redirect /about-us.php to /about-us
+RewriteCond %{THE_REQUEST} /about-us\.php [NC]
+RewriteRule ^ /about-us [R=301,L]
+
+# Redirect /projects.php to /projects
+RewriteCond %{THE_REQUEST} /projects\.php [NC]
+RewriteRule ^ /projects [R=301,L]
+
+# Redirect /services.php to /services
+RewriteCond %{THE_REQUEST} /services\.php [NC]
+RewriteRule ^ /services [R=301,L]
+
+# Redirect /contact.php to /contact
+RewriteCond %{THE_REQUEST} /contact\.php [NC]
+RewriteRule ^ /contact [R=301,L]
+
+# Internal rewrite to add .php extension back
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]

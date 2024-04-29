@@ -1,0 +1,216 @@
+<?php
+@include 'config.php';
+// Fetch testimonials from the database
+$select = mysqli_query($conn, "SELECT * FROM products");
+$products = mysqli_fetch_all($select, MYSQLI_ASSOC);
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shanga Empower</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css?v=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <style>
+    /* .title-space{
+        display:block;
+    }    */
+    .title-container{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 20px;
+        background-color:#5C4033;
+    }
+    .title{
+        font-size: 1.2rem;
+        color: #fdb714;
+        margin: 0;
+    }
+    
+   .feedback {
+        top: 183px;
+    position: relative;
+    }
+    main .back{
+        margin-top:-200px;
+    }
+    .burger-icon {
+        display: none;
+        font-size: 32px;
+        color: #fdb714;
+        cursor: pointer;
+        padding-right: 20px;
+    }
+
+    @media (max-width: 1000px) {
+        .burger-icon {
+            display: block;
+        }
+        .nav-links {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: 60px;
+            left: 0;
+            background-color: #333;
+            width: 100%;
+            z-index: 1;
+        }
+        .nav-links.show {
+            display: flex;
+        }
+        .nav-links li {
+            margin: 0;
+            padding: 15px 20px;
+            border-bottom: 1px solid #555;
+            list-style: none;
+        }
+    }
+
+    </style>
+    <link rel="icon" href="imgs\Logo.jpg" type="image/icon type">
+</head>
+<body>
+
+<header>
+    <div class="title-container">
+        <div class="logo-title">
+            <div class="logo">
+                <img src="imgs/Logo-removebg-preview.jpg" alt="Logo">
+            </div>
+            <h1 class="title">
+                Shanga Empower
+            </h1>
+        </div>
+        <div class="burger-icon" id="burger-icon">
+            <i class="fa fa-bars"></i>
+        </div>
+    </div>
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li><a href="https://www.shangaempower.com/homepage.php">Home</a></li>
+            <li><a href="https://www.shangaempower.com/about-us.php">About Us</a></li>
+            <li><a href="https://www.shangaempower.com/projects.php">Projects</a></li>
+            <li class="dropdown">
+                <a href="#">Services</a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Strategic Management</a></li>
+                    <li><a href="#">Training</a></li>
+                    <li><a href="#">Business Development</a></li>
+                </ul>
+            </li>
+            <li><a href="https://www.shangaempower.com/contact.php">Contact us</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+
+<div class="whitie-container">
+            <div class="whitie">
+                <div class="vertical-center">
+                    <h5>SHANGA</h5>
+                    <h7>EMPOWER.</h7>
+                </div>
+            </div>
+        </div>
+
+    
+        </div>
+    <div class="back">
+    <div class="shanga">
+        <h4> Shanga Empower is a business development and growth consultancy that works with businesses to identify weaknesses and challenges and sustainable
+solutions. We explore growth opportunities for the success of the businesses,with a focus on Finance, sales and marketing strategies and business development.
+You can reach out to us via <a href="mailto:shangaempower94@gmail.com" style=color:gray;>email</a>.<br>
+
+    </h4>
+    </div>
+
+    </div>
+    <div class="serves">
+    <h2>How We Serve You.</h2>
+    <div class="serve">
+    
+    <div class="rows">
+        <div class="cols">serve1</div>
+        <div class="cols">serve2</div>
+    </div>
+    </div>
+    <h2>Featured Services.</h2>
+    <div class="serve">
+
+    <div class="rows">
+        <div class="cols">serve1</div>
+        <div class="cols">serve2</div>
+    </div>
+    </div>
+    </div>
+
+    <div class="feedback">
+        <h2><span class="testimonialls">Testimonials</span></h2> 
+        <div class="card2">
+            <?php foreach ($products as $products) { ?>
+                <div class="ccard">
+                <div class="theImg">
+    <ul><li>
+        <?php $imagePath = 'uploaded_img/' . htmlspecialchars($products['image']); ?>
+        <img src="<?php echo $imagePath; ?>" height="100" alt="">
+    </li></ul>
+    <ul>
+        <a href="<?php echo htmlspecialchars($products['link']); ?>">
+            <button>LinkedIn</button>
+
+        </a>
+    </ul>
+    <ul><li style= color:#fdb714;>click the above button to view <?php echo htmlspecialchars($products['name']); ?>'s LinkedIn account.</li></ul>
+</div>
+
+                    <div class="info">
+                        <ul>
+                            <li><?php echo htmlspecialchars($products['name']); ?></li>
+                            <blockquote class="blockstyle">
+                                <span class="triangle"></span><?php echo htmlspecialchars($products['testimonial']); ?>
+                            </blockquote>
+                        </ul>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+        <form action=""></form>
+    </div>
+   
+    <script>
+        const burgerIcon = document.getElementById("burger-icon");
+        const navLinks = document.querySelector(".nav-links");
+
+        burgerIcon.addEventListener("click", function () {
+            navLinks.classList.toggle("show");
+        });
+
+        window.addEventListener("resize", function () {
+            if (window.innerWidth >= 1000) {
+                navLinks.classList.remove("show");
+            }
+        });
+    </script>
+    
+</body>
+<footer>
+<ul>
+    <a href="">
+        <li></li>
+    </a>
+    <a href="">
+        <li></li>
+    </a>
+    <a href="">
+        <li></li>
+    </a>
+</ul>
+</footer>
+</html>
